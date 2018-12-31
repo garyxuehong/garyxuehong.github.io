@@ -1,3 +1,6 @@
+- id: General
+  description: General stuff
+  image: img/testimg2.jpg
 - id: Java
   description: Java technologies
   image: img/speeches-cover.jpg
