@@ -3,7 +3,7 @@ layout: post
 title: "How JavaVM treat boolean values"
 author: Gary
 tags: ["Java"]
-image: img/welcome-to-ghost.jpg
+image: ./01-bool-in-vm.banner.png
 date: "2019-01-01T22:02:37.000Z"
 draft: false
 ---
