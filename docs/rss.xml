@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gary' Blog]]></title><description><![CDATA[The professional blogging by Gary]]></description><link>http://localhost:8000</link><generator>RSS for Node</generator><lastBuildDate>Tue, 01 Jan 2019 22:25:26 GMT</lastBuildDate><item><title><![CDATA[How JavaVM treat boolean values]]></title><description><![CDATA[TL:DR; jvm will use   as the constant value the represen boolean  .
+But jvm also treat any postive integer value as true, like c. Take the…]]></description><link>http://localhost:8000/javavm/01-bool-in-vm/</link><guid isPermaLink="false">http://localhost:8000/javavm/01-bool-in-vm/</guid><pubDate>Tue, 01 Jan 2019 22:02:37 GMT</pubDate><content:encoded>&lt;p&gt;TL:DR;&lt;/p&gt;
+&lt;p&gt;jvm will use &lt;code class=&quot;language-text&quot;&gt;int 1&lt;/code&gt; as the constant value the represen boolean &lt;code class=&quot;language-text&quot;&gt;true&lt;/code&gt;.
+But jvm also treat any postive integer value as true, like c.&lt;/p&gt;
+&lt;p&gt;Take the following code as example,&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;java&quot;&gt;&lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Foo&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+ &lt;span class=&quot;token keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;String&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; args&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;boolean&lt;/span&gt; flag &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;flag&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; System&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;out&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Hello, Java!&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;flag &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; System&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;out&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Hello, JVM!&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;By default, javac will put &lt;code class=&quot;language-text&quot;&gt;1&lt;/code&gt; as value in the variable &lt;code class=&quot;language-text&quot;&gt;flag&lt;/code&gt;. So the comparission &lt;code class=&quot;language-text&quot;&gt;if(flag == true)&lt;/code&gt; will be translated to &lt;code class=&quot;language-text&quot;&gt;if(1 == 1)&lt;/code&gt; in jvm.&lt;/p&gt;
+&lt;p&gt;However, if we use asmtools to modified the value of flag to be &lt;code class=&quot;language-text&quot;&gt;2&lt;/code&gt;, then the condition &lt;code class=&quot;language-text&quot;&gt;if(flag == true)&lt;/code&gt; will be evaluated as &lt;code class=&quot;language-text&quot;&gt;false&lt;/code&gt;, but the condition &lt;code class=&quot;language-text&quot;&gt;if(flag)&lt;/code&gt;, which is translated to &lt;code class=&quot;language-text&quot;&gt;if(2)&lt;/code&gt;, will still hold true.&lt;/p&gt;
+&lt;p&gt;You can run the example in the following bash scripts.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token shebang important&quot;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&gt;&gt;gen code...&quot;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;
+public class Foo {
+ public static void main(String[] args) {
+  boolean flag = true;
+  if (flag) System.out.println(&quot;Hello, Java!&quot;);
+  if (flag == true) System.out.println(&quot;Hello, JVM!&quot;);
+ }
+}&apos;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; Foo.java
+
+
+&lt;span class=&quot;token keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&gt;&gt;javac Foo.java&quot;&lt;/span&gt;
+javac Foo.java
+
+&lt;span class=&quot;token keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&gt;&gt;Run unmoded class&quot;&lt;/span&gt;
+java Foo
+
+&lt;span class=&quot;token keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&gt;&gt;Read class file with asmtools&quot;&lt;/span&gt;
+java -cp ~/install/asmtools.jar org.openjdk.asmtools.jdis.Main Foo.class &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; Foo.jasm.1
+
+&lt;span class=&quot;token keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&gt;&gt;Print it out&quot;&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;cat&lt;/span&gt; Foo.jasm.1
+
+&lt;span class=&quot;token keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&gt;&gt;Awk replce generated jasm file??&quot;&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;awk&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;NR==1,/iconst_1/{sub(/iconst_1/, &quot;iconst_2&quot;)} 1&apos;&lt;/span&gt; Foo.jasm.1 &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; Foo.jasm
+
+&lt;span class=&quot;token keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&gt;&gt;Print moded jasm file&quot;&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;cat&lt;/span&gt; Foo.jasm
+
+&lt;span class=&quot;token keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&gt;&gt;Print diff&quot;&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;diff&lt;/span&gt; --unified&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;3 Foo.jasm.1 Foo.jasm
+
+&lt;span class=&quot;token keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&gt;&gt;Use asmtools to compile mod jasm file&quot;&lt;/span&gt;
+java -cp ~/install/asmtools.jar org.openjdk.asmtools.jasm.Main Foo.jasm
+
+&lt;span class=&quot;token keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&gt;&gt;Run mod class&quot;&lt;/span&gt;
+java Foo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Refs:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Download asmtools (&lt;a href=&quot;https://wiki.openjdk.java.net/display/CodeTools/How+to+build+AsmTools&quot;&gt;https://wiki.openjdk.java.net/display/CodeTools/How+to+build+AsmTools&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;This article is mainly quoted from origin tutoria (&lt;a href=&quot;https://time.geekbang.org/column/article/11289&quot;&gt;https://time.geekbang.org/column/article/11289&lt;/a&gt;)&lt;/li&gt;
+&lt;/ol&gt;</content:encoded></item><item><title><![CDATA[Let's blog]]></title><description><![CDATA[👋 So let’s blog in 2019.]]></description><link>http://localhost:8000/welcome/</link><guid isPermaLink="false">http://localhost:8000/welcome/</guid><pubDate>Mon, 31 Dec 2018 23:02:37 GMT</pubDate><content:encoded>&lt;p&gt;👋 So let’s blog in 2019.&lt;/p&gt;</content:encoded></item></channel></rss>
