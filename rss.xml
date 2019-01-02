@@ -1,4 +1,104 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gary' Blog]]></title><description><![CDATA[The professional blogging by Gary]]></description><link>http://localhost:8000</link><generator>RSS for Node</generator><lastBuildDate>Tue, 01 Jan 2019 22:54:27 GMT</lastBuildDate><item><title><![CDATA[How JavaVM treat boolean values]]></title><description><![CDATA[TL:DR; jvm will use   as the constant value the represen boolean  .
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gary' Blog]]></title><description><![CDATA[The professional blogging by Gary]]></description><link>http://localhost:8000</link><generator>RSS for Node</generator><lastBuildDate>Wed, 02 Jan 2019 22:50:42 GMT</lastBuildDate><item><title><![CDATA[How JavaVM load class with orders]]></title><description><![CDATA[Recently I learned when Java class loader   a class and when does it   it. Take the following as example. We can use some special jvm…]]></description><link>http://localhost:8000/javavm/03-class-loading-in-vm/</link><guid isPermaLink="false">http://localhost:8000/javavm/03-class-loading-in-vm/</guid><pubDate>Wed, 02 Jan 2019 23:40:37 GMT</pubDate><content:encoded>&lt;p&gt;Recently I learned when Java class loader &lt;code class=&quot;language-text&quot;&gt;load&lt;/code&gt; a class and when does it &lt;code class=&quot;language-text&quot;&gt;initialize&lt;/code&gt; it.&lt;/p&gt;
+&lt;p&gt;Take the following as example.&lt;/p&gt;
+&lt;p&gt;We can use some special jvm options to show class loading info, like &lt;code class=&quot;language-text&quot;&gt;java -verbose:class Singleton&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;java&quot;&gt;&lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;LazyHolder&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;final&lt;/span&gt; Singleton INSTANCE &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      System&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;out&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;LazyHolder.&amp;lt;clinit&gt;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; Object &lt;span class=&quot;token function&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;boolean&lt;/span&gt; flag&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;flag&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;LazyHolder&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; LazyHolder&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;INSTANCE&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;String&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; args&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    System&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;out&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;----&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When execute this class, class loader will first load &lt;code class=&quot;language-text&quot;&gt;Singleton&lt;/code&gt;, then load &lt;code class=&quot;language-text&quot;&gt;LazyHolder&lt;/code&gt;. But something interesting here is jvm will not &lt;code class=&quot;language-text&quot;&gt;clinit&lt;/code&gt; the &lt;code class=&quot;language-text&quot;&gt;LazyHolder&lt;/code&gt; when constructing an empty &lt;code class=&quot;language-text&quot;&gt;Array&lt;/code&gt; of &lt;code class=&quot;language-text&quot;&gt;LazyHolder&lt;/code&gt;. It will &lt;code class=&quot;language-text&quot;&gt;clinit&lt;/code&gt; the class when it is being really used, like &lt;code class=&quot;language-text&quot;&gt;return LazyHolder.INSTANCE&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We can try the above with script at the end.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;It will output as following order&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;[0.123s][info][class,load] Singleton source: file:/Users/xueg/source/fun/javavm/03-how-class-load/&lt;/code&gt;
+&lt;code class=&quot;language-text&quot;&gt;...&lt;/code&gt;
+&lt;code class=&quot;language-text&quot;&gt;[0.125s][info][class,load] Singleton$LazyHolder source: file:/Users/xueg/source/fun/javavm/03-how-class-load/&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Above indicates that the order the classed loaded is &lt;code class=&quot;language-text&quot;&gt;Singleton&lt;/code&gt; —&gt; &lt;code class=&quot;language-text&quot;&gt;Singleton$LazyHolder&lt;/code&gt;&lt;/p&gt;
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;and continue output following&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;----&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This means the constructing of new LazyHolder array &lt;code class=&quot;language-text&quot;&gt;new LazyHolder[2]&lt;/code&gt; is called. But the &lt;code class=&quot;language-text&quot;&gt;static{}&lt;/code&gt; init code of the LazyHolder is still not being called.&lt;/p&gt;
+&lt;ol start=&quot;3&quot;&gt;
+&lt;li&gt;and continue output following&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;java.lang.VerifyError: Operand stack overflow
+Exception Details:
+  Location:
+    Singleton$LazyHolder.&amp;lt;init&amp;gt;()V @0: aload_0
+  Reason:
+    Exceeded max stack size.
+  Current Frame:
+    bci: @0
+    flags: { flagThisUninit }
+    locals: { uninitializedThis }
+    stack: { }
+  Bytecode:
+    0000000: 2ab7 0007 b1
+
+        at Singleton.getInstance(Singleton.java:12)
+        at Singleton.main(Singleton.java:17)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is because we mod the bytecode on purpose to show that even there’s an error in the init code, it doesn’t prevent jvm from loading the class&lt;/p&gt;
+&lt;p&gt;Full scripts as follow.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token shebang important&quot;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Generating Singleton.java&quot;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;
+public class Singleton {
+  private Singleton() {}
+  private static class LazyHolder {
+    static final Singleton INSTANCE = new Singleton();
+    static {
+      System.out.println(&quot;LazyHolder.&amp;lt;clinit&gt;&quot;);
+    }
+  }
+  public static Object getInstance(boolean flag) {
+    if (flag) return new LazyHolder[2];
+    return LazyHolder.INSTANCE;
+  }
+  public static void main(String[] args) {
+    getInstance(true);
+    System.out.println(&quot;----&quot;);
+    getInstance(false);
+  }
+}&apos;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; Singleton.java
+
+&lt;span class=&quot;token keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Compiling...&quot;&lt;/span&gt;
+javac Singleton.java
+
+&lt;span class=&quot;token keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Run with class loading order printed&quot;&lt;/span&gt;
+java -verbose:class Singleton
+
+&lt;span class=&quot;token keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Reading LazyHolder&quot;&lt;/span&gt;
+java -cp ~/install/asmtools.jar org.openjdk.asmtools.jdis.Main Singleton\&lt;span class=&quot;token variable&quot;&gt;$LazyHolder&lt;/span&gt;.class &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; Singleton\&lt;span class=&quot;token variable&quot;&gt;$LazyHolder&lt;/span&gt;.jasm.1
+
+&lt;span class=&quot;token keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Mod bytecode to trigger error in the static init block of LazyHolder&quot;&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;awk&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;NR==1,/stack 1/{sub(/stack 1/, &quot;stack 0&quot;)} 1&apos;&lt;/span&gt; Singleton\&lt;span class=&quot;token variable&quot;&gt;$LazyHolder&lt;/span&gt;.jasm.1 &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; Singleton\&lt;span class=&quot;token variable&quot;&gt;$LazyHolder&lt;/span&gt;.jasm
+
+&lt;span class=&quot;token keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Put back moded jasm&quot;&lt;/span&gt;
+java -cp ~/install/asmtools.jar org.openjdk.asmtools.jasm.Main Singleton\&lt;span class=&quot;token variable&quot;&gt;$LazyHolder&lt;/span&gt;.jasm
+
+&lt;span class=&quot;token keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Run with new result&quot;&lt;/span&gt;
+java -verbose:class Singleton&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Refs:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Download asmtools (&lt;a href=&quot;https://wiki.openjdk.java.net/display/CodeTools/How+to+build+AsmTools&quot;&gt;https://wiki.openjdk.java.net/display/CodeTools/How+to+build+AsmTools&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;This article is mainly quoted from origin tutoria (&lt;a href=&quot;https://time.geekbang.org/column/article/11523&quot;&gt;https://time.geekbang.org/column/article/11523&lt;/a&gt;)&lt;/li&gt;
+&lt;/ol&gt;</content:encoded></item><item><title><![CDATA[How JavaVM treat boolean values]]></title><description><![CDATA[TL:DR; jvm will use   as the constant value the represen boolean  .
 But jvm also treat any postive integer value as true, like c. Take the…]]></description><link>http://localhost:8000/javavm/01-bool-in-vm/</link><guid isPermaLink="false">http://localhost:8000/javavm/01-bool-in-vm/</guid><pubDate>Tue, 01 Jan 2019 22:02:37 GMT</pubDate><content:encoded>&lt;p&gt;TL:DR;&lt;/p&gt;
 &lt;p&gt;jvm will use &lt;code class=&quot;language-text&quot;&gt;int 1&lt;/code&gt; as the constant value the represen boolean &lt;code class=&quot;language-text&quot;&gt;true&lt;/code&gt;.
 But jvm also treat any postive integer value as true, like c.&lt;/p&gt;
