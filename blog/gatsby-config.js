@@ -1,12 +1,12 @@
 const path = require('path');
 
-const siteUrl = 'http://localhost:8000'
+const siteUrl = 'https://blog.garyxue.me';
 
 module.exports = {
   siteMetadata: {
-    title: 'Gary\' Blog',
+    title: 'CB - Continuous Blogging',
     description: 'The professional blogging by Gary',
-    siteUrl: siteUrl
+    siteUrl: siteUrl,
   },
   mapping: {
     'MarkdownRemark.frontmatter.author': 'AuthorYaml',
@@ -48,7 +48,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-canonical-urls',
       options: {
-        siteUrl: siteUrl
+        siteUrl: siteUrl,
       },
     },
     'gatsby-plugin-emotion',
@@ -80,6 +80,37 @@ module.exports = {
         sampleRate: 100,
         // Determines how often site speed tracking beacons will be sent
         siteSpeedSampleRate: 10,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        output: `/sitemap.xml`,
+        exclude: ['/preview/**'],
+        query: `
+          {
+            site {
+              siteMetadata {
+                siteUrl
+              }
+            }
+   
+            allSitePage {
+              edges {
+                node {
+                  path
+                }
+              }
+            }
+        }`,
+        serialize: ({ site, allSitePage }) =>
+          allSitePage.edges.map(edge => {
+            return {
+              url: site.siteMetadata.siteUrl + edge.node.path,
+              changefreq: `daily`,
+              priority: 0.7,
+            };
+          }),
       },
     },
   ],

@@ -34,7 +34,7 @@ const config: WebsiteConfig = {
   coverImage: 'img/blog-cover.jpg',
   logo: 'img/ghost-logo.png',
   lang: 'en',
-  siteUrl: '',
+  siteUrl: 'https://blog.garyxue.me',
   facebook: '',
   twitter: '',
   showSubscribe: false,
