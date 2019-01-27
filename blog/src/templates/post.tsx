@@ -22,7 +22,8 @@ import { colors } from '../styles/colors';
 import { inner, outer, SiteHeader, SiteMain } from '../styles/shared';
 import config from '../website-config';
 
-import Disqus from 'disqus-react';
+import ReactUtterences from 'react-utterances';
+const repo = 'garyxuehong/blog-comments';
 
 const PostTemplate = css`
   .site-main {
@@ -216,13 +217,6 @@ const PageTemplate: React.FunctionComponent<PageTemplateProps> = props => {
     height = String(Number(width) / post.frontmatter.image.childImageSharp.fluid.aspectRatio);
   }
 
-  const disqusShortname = 'bloggaryxueme';
-  const disqusConfig = {
-      url: config.siteUrl + props.pathContext.slug,
-      identifier: props.pathContext.slug,
-      title: post.frontmatter.title
-  };
-
   return (
     <IndexLayout className="post-template">
       <Helmet>
@@ -307,7 +301,7 @@ const PageTemplate: React.FunctionComponent<PageTemplateProps> = props => {
               {/* The big email subscribe modal content */}
               {config.showSubscribe && <Subscribe title={config.title} />}
 
-              <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+              <ReactUtterences repo={repo} type={'pathname'} />
 
               <PostFullFooter>
                 <AuthorCard author={post.frontmatter.author} />
