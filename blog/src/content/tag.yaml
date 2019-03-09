@@ -7,3 +7,7 @@
 - id: Javascript
   description: Javascript technologies
   image: img/david-kovalenko-1265911-unsplash.jpg
+- id: NodeJS
+  description: NodeJS technologies
+  image: img/nodejs.jpg
+

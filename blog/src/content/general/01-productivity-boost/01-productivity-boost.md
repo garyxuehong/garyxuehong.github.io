@@ -5,7 +5,7 @@ author: Gary
 tags: ["General"]
 image: ./banner.jpg
 date: "2019-02-28T16:17:00.000Z"
-draft: true
+draft: false
 ---
 
 <small>on a mac</small>
