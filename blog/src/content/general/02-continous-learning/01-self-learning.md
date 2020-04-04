@@ -17,6 +17,7 @@ Just try to mark down what I'm goging to learn.
     * Learn collections (basic)
         * List, ArrayList, LinkedList
         * Map, HashMap, etc (to complete)
+4. Netty [Link](https://github.com/netty/netty/)
 
 ## Devops
 ### Kubernetes

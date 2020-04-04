@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Self learning"
+title: "Learn OAuth"
 author: Gary
 tags: ["General"]
 image: "./classroom-2093744_1920.jpg"
