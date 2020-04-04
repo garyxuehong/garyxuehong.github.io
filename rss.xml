@@ -1,4 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[CB - Continuous Blogging]]></title><description><![CDATA[The professional blogging by Gary]]></description><link>https://blog.garyxue.me</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 17 Jan 2020 11:19:37 GMT</lastBuildDate><item><title><![CDATA[Self learning]]></title><description><![CDATA[Just try to mark down what I’m goging to learn. Java Java language spec 13. Link Java virtual machine spec 13. Link JDK source code: Learn…]]></description><link>https://blog.garyxue.me/general/02-continous-learning/01-self-learning/</link><guid isPermaLink="false">https://blog.garyxue.me/general/02-continous-learning/01-self-learning/</guid><pubDate>Fri, 17 Jan 2020 09:48:37 GMT</pubDate><content:encoded>&lt;p&gt;Just try to mark down what I’m goging to learn.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[CB - Continuous Blogging]]></title><description><![CDATA[The professional blogging by Gary]]></description><link>https://blog.garyxue.me</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 04 Apr 2020 11:16:32 GMT</lastBuildDate><item><title><![CDATA[Learn Netty]]></title><description><![CDATA[A tracker of how I learn netty the server. So I downloaded the source code from github Import it into intelliJ Read as follow (at branch 4.…]]></description><link>https://blog.garyxue.me/general/02-continous-learning/03-learn-netty/</link><guid isPermaLink="false">https://blog.garyxue.me/general/02-continous-learning/03-learn-netty/</guid><pubDate>Fri, 03 Apr 2020 22:11:37 GMT</pubDate><content:encoded>&lt;p&gt;A tracker of how I learn netty the server.&lt;/p&gt;
+&lt;p&gt;So I downloaded the source code from &lt;a href=&quot;https://github.com/netty/netty/&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Import it into intelliJ&lt;/p&gt;
+&lt;p&gt;Read as follow (at branch 4.1):&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;module: transport, package: io.netty.bootstrap
+start reading at 2020-04-03 21:00
+done reading at 2020-04-04 22:00&lt;/li&gt;
+&lt;li&gt;module: transport, package: io.netty.channel
+start reading at 2020-04-04 22:15
+done reading at TBD&lt;/li&gt;
+&lt;/ol&gt;</content:encoded></item><item><title><![CDATA[Learn OAuth]]></title><description><![CDATA[If you want to implement a secure OAuth solution today, it requires reading: 
+  RFC 6749 (OAuth 2.0 Core), 
+  RFC 6750 (Bearer Tokens…]]></description><link>https://blog.garyxue.me/general/02-continous-learning/02-oauth/</link><guid isPermaLink="false">https://blog.garyxue.me/general/02-continous-learning/02-oauth/</guid><pubDate>Wed, 04 Mar 2020 09:48:37 GMT</pubDate><content:encoded>&lt;p&gt;If you want to implement a secure OAuth solution today, it requires reading:
+RFC 6749 (OAuth 2.0 Core),
+RFC 6750 (Bearer Tokens),
+RFC 6819 (Threat Model and Security Considerations),
+RFC 8252 (OAuth for Native Apps),
+RFC 8628 (Device Grant), OAuth for Browser-Based Apps, OAuth 2.0 Security Best Current Practice,
+RFC 7009 (Token Revocation),
+RFC 8414 (Authorization Server Metadata),
+and if you’re also implementing an OAuth server, then you need to read
+RFC 7519 (JWT), JWT Best Current Practice, JWT Profile for Access Tokens, and probably some others that I forgot. That’s a lot of material.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Self learning]]></title><description><![CDATA[Just try to mark down what I’m goging to learn. Java Java language spec 13. Link Java virtual machine spec 13. Link JDK source code: Learn…]]></description><link>https://blog.garyxue.me/general/02-continous-learning/01-self-learning/</link><guid isPermaLink="false">https://blog.garyxue.me/general/02-continous-learning/01-self-learning/</guid><pubDate>Fri, 17 Jan 2020 09:48:37 GMT</pubDate><content:encoded>&lt;p&gt;Just try to mark down what I’m goging to learn.&lt;/p&gt;
 &lt;h2&gt;Java&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;Java language spec 13. &lt;a href=&quot;https://docs.oracle.com/javase/specs/jls/se13/html/index.html&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
@@ -15,6 +37,7 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;Netty &lt;a href=&quot;https://github.com/netty/netty/&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2&gt;Devops&lt;/h2&gt;
 &lt;h3&gt;Kubernetes&lt;/h3&gt;
@@ -35,7 +58,17 @@
 &lt;li&gt;
 &lt;p&gt;Extend Kubernetes&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;https://kubernetes.io/docs/concepts/extend-kubernetes/extend-cluster/&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://kubernetes.io/docs/concepts/extend-kubernetes/extend-cluster/&quot;&gt;Link&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;Docker&lt;/h3&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Networking&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https://docs.docker.com/network/iptables/&quot;&gt;Docker and IPTables&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://success.docker.com/article/networking&quot;&gt;Networking&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
