@@ -1,4 +1,44 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[CB - Continuous Blogging]]></title><description><![CDATA[The professional blogging by Gary]]></description><link>https://blog.garyxue.me</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 04 Apr 2020 11:16:32 GMT</lastBuildDate><item><title><![CDATA[Learn Netty]]></title><description><![CDATA[A tracker of how I learn netty the server. So I downloaded the source code from github Import it into intelliJ Read as follow (at branch 4.…]]></description><link>https://blog.garyxue.me/general/02-continous-learning/03-learn-netty/</link><guid isPermaLink="false">https://blog.garyxue.me/general/02-continous-learning/03-learn-netty/</guid><pubDate>Fri, 03 Apr 2020 22:11:37 GMT</pubDate><content:encoded>&lt;p&gt;A tracker of how I learn netty the server.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[CB - Continuous Blogging]]></title><description><![CDATA[The professional blogging by Gary]]></description><link>https://blog.garyxue.me</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 03 May 2020 10:28:19 GMT</lastBuildDate><item><title><![CDATA[Quick sort with Zac]]></title><description><![CDATA[Today I teach Zac how to do a quick sort, with toys and code. Zac, 6yo, has show interest in learning programming. And of course I’d love to…]]></description><link>https://blog.garyxue.me/stem/01-quick-sort-with-zac/</link><guid isPermaLink="false">https://blog.garyxue.me/stem/01-quick-sort-with-zac/</guid><pubDate>Sun, 03 May 2020 20:10:00 GMT</pubDate><content:encoded>&lt;p&gt;Today I teach Zac how to do a quick sort, with toys and code.&lt;/p&gt;
+&lt;p&gt;Zac, 6yo, has show interest in learning programming. And of course I’d love to teach him.&lt;/p&gt;
+&lt;p&gt;At the begining, we do some sorting (&lt;code class=&quot;language-text&quot;&gt;bubble sort&lt;/code&gt;) using poker cards.&lt;/p&gt;
+&lt;p&gt;It was fun, but it wasn’t how the computer works. Everytime Zac picked up a card, he puts it straightly into the right position. It is obvious (as there’re only 10 poker cards), and he couldn’t understand when I told him computer can’t the card into that position straight away. &lt;/p&gt;
+&lt;p&gt;Instead, I took small step, mimic the computer, pickup a card, compare, and swap one by one every time, then move on to the next &lt;code class=&quot;language-text&quot;&gt;for&lt;/code&gt; loop.&lt;/p&gt;
+&lt;p&gt;Now he seems get that, which is cool, I move on the &lt;code class=&quot;language-text&quot;&gt;merge sort&lt;/code&gt;. Suprisingly, &lt;code class=&quot;language-text&quot;&gt;merge sort&lt;/code&gt; is so much easier to explain than &lt;code class=&quot;language-text&quot;&gt;bubble sort&lt;/code&gt;. I just told him, &lt;code class=&quot;language-text&quot;&gt;divide&lt;/code&gt; and cards into two piles, (pretend to) give them two your two brothers (this is tricky as he has only one brother). Now close your eyes and imaging they have sorted each pile for you, all you need to do now is pick one from each of the pile and put (&lt;code class=&quot;language-text&quot;&gt;merge&lt;/code&gt;) them together. &lt;/p&gt;
+&lt;p&gt;We did some &lt;code class=&quot;language-text&quot;&gt;tower of hanoi&lt;/code&gt; together before, so the &lt;code class=&quot;language-text&quot;&gt;recursion&lt;/code&gt; concept is a bit familiar and he get that.&lt;/p&gt;
+&lt;p&gt;Awesome, with that in mind, I gave him some &lt;code class=&quot;language-text&quot;&gt;quick sort&lt;/code&gt;, which went okay, but he a bit tired by then.&lt;/p&gt;
+&lt;p&gt;The other night, I decided it is time to do some coding. Since only thing he knows is just some &lt;code class=&quot;language-text&quot;&gt;var&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;for&lt;/code&gt;, I do most of the typing. &lt;/p&gt;
+&lt;p&gt;We hardcoded the number arrays, and grabbed a paper, mimic some runs on it using pencils (and fingers/pointers, haha)&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 800px;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/154f5cc229abe9f56e313499a1ed580b/3a0b5/bubble-paper.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 62.87499999999999%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAANABQDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAEDBP/EABYBAQEBAAAAAAAAAAAAAAAAAAABAv/aAAwDAQACEAMQAAAB1MvmzGH/xAAZEAEAAgMAAAAAAAAAAAAAAAAAAREQMTL/2gAIAQEAAQUC5bVikv/EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQMBAT8BP//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQIBAT8BP//EABQQAQAAAAAAAAAAAAAAAAAAACD/2gAIAQEABj8CX//EABgQAQEBAQEAAAAAAAAAAAAAAAEAITFB/9oACAEBAAE/IQBlsR7swQu7/9oADAMBAAIAAwAAABD0z//EABURAQEAAAAAAAAAAAAAAAAAAAEQ/9oACAEDAQE/EGf/xAAVEQEBAAAAAAAAAAAAAAAAAAAAEf/aAAgBAgEBPxBH/8QAHBAAAgICAwAAAAAAAAAAAAAAAREAITFBUXGB/9oACAEBAAE/EFUy9lMwKBv2EKxLMxHfEA91CIBFVP/Z&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;paper for bubble sort&quot;
+        title=&quot;paper for bubble sort&quot;
+        src=&quot;/static/154f5cc229abe9f56e313499a1ed580b/3a0b5/bubble-paper.jpg&quot;
+        srcset=&quot;/static/154f5cc229abe9f56e313499a1ed580b/e8554/bubble-paper.jpg 293w,
+/static/154f5cc229abe9f56e313499a1ed580b/59c70/bubble-paper.jpg 585w,
+/static/154f5cc229abe9f56e313499a1ed580b/3a0b5/bubble-paper.jpg 800w&quot;
+        sizes=&quot;(max-width: 800px) 100vw, 800px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;It works quite well. I’ve to admin that paper and pencil (fingers) are still the best tool we have in terms of education.&lt;/p&gt;
+&lt;p&gt;At the end, we did the &lt;a href=&quot;https://zac.garyxue.me/Javascript/sort.js&quot;&gt;code&lt;/a&gt; together. Hooray, another night of coding!&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Learn Netty]]></title><description><![CDATA[A tracker of how I learn netty the server. So I downloaded the source code from github Import it into intelliJ Read as follow (at branch 4.…]]></description><link>https://blog.garyxue.me/general/02-continous-learning/03-learn-netty/</link><guid isPermaLink="false">https://blog.garyxue.me/general/02-continous-learning/03-learn-netty/</guid><pubDate>Fri, 03 Apr 2020 22:11:37 GMT</pubDate><content:encoded>&lt;p&gt;A tracker of how I learn netty the server.&lt;/p&gt;
 &lt;p&gt;So I downloaded the source code from &lt;a href=&quot;https://github.com/netty/netty/&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Import it into intelliJ&lt;/p&gt;
 &lt;p&gt;Read as follow (at branch 4.1):&lt;/p&gt;
