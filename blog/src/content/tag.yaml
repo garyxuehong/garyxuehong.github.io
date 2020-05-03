@@ -10,4 +10,7 @@
 - id: NodeJS
   description: NodeJS technologies
   image: img/nodejs.jpg
+- id: STEM
+  description: S.T.E.M. (mostly for my kids)
+  image: img/stem.jpg
 
