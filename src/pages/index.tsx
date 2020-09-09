@@ -141,7 +141,8 @@ const IndexPage: React.FunctionComponent<IndexProps> = props => {
           <div className={`${inner}`}>
             <div className={`${PostFeed} ${PostFeedRaise}`}>
               {props.data.allMarkdownRemark.edges.map(post => {
-                return <PostCard key={post.node.fields.slug} post={post.node} />;
+                const { node: { frontmatter: {draft}}} = post;
+                return draft === true ? null : <PostCard key={post.node.fields.slug} post={post.node} />;
               })}
             </div>
           </div>
@@ -184,6 +185,7 @@ export const pageQuery = graphql`
             title
             date
             tags
+            draft
             image {
               childImageSharp {
                 fluid(maxWidth: 3720) {

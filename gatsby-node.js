@@ -56,6 +56,7 @@ exports.createPages = async ({ graphql, actions }) => {
               title
               tags
               date
+              draft
               image {
                 childImageSharp {
                   fluid(maxWidth: 3720) {
@@ -105,7 +106,13 @@ exports.createPages = async ({ graphql, actions }) => {
 
   // Create post pages
   const posts = result.data.allMarkdownRemark.edges;
-  posts.forEach(({ node }, index) => {
+  posts.forEach((post, index) => {
+    const { node } = post;
+    const { frontmatter: { draft } } = node;
+    if(draft === true || draft === 'true') {
+      console.log('found draft item, ignoring it... ', node.frontmatter.title);
+      return;
+    }
     const { slug, layout } = node.fields;
     const prev = index === 0 ? null : posts[index - 1].node;
     const next = index === posts.length - 1 ? null : posts[index + 1].node;

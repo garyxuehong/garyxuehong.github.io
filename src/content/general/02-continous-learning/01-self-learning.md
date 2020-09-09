@@ -5,7 +5,7 @@ author: Gary
 tags: ["General"]
 image: "./classroom-2093744_1920.jpg"
 date: "2020-01-17T09:48:37.000Z"
-draft: false
+draft: true
 ---
 
 Just try to mark down what I'm goging to learn.

@@ -37,7 +37,7 @@ const About: React.FunctionComponent = () => (
 
           <PostFullContent className="post-full-content">
             <div className="post-content">
-              some about content
+              <small style={{ color: 'lightgray' }}>imagine what you think of about Gary :) </small>
             </div>
           </PostFullContent>
         </article>

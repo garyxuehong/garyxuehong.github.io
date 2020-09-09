@@ -8,8 +8,6 @@ image: ./01-stream.jpg
 draft: false
 ---
 
-This is blog 1 of a serie of [learning nodejs via api doc](../00-api-doc/)
-
 Streaming is a very important part of NodeJS (or any programming language). Given NodeJS is running on single thread (I haven't learn worker thread yet, so I guess I will stick with single thread for now), processing data is stream on async io will be very interesting and important.
 
 I learng this part basically from the [api doc](https://nodejs.org/api/stream.html). Also watch some of the video from [James Halliday - Networking and Streams](https://frontendmasters.com/courses/networking-streams/).
